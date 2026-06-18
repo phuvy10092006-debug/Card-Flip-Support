@@ -6,7 +6,11 @@
     <title>Lật Thẻ Play Together</title>
 
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
       body {
         font-family: "Segoe UI", sans-serif;
@@ -19,10 +23,12 @@
         color: white;
         margin: 20px 0;
         font-size: 42px;
-        text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
       }
 
-      .control { margin-bottom: 25px; }
+      .control {
+        margin-bottom: 25px;
+      }
 
       input {
         width: 80px;
@@ -42,8 +48,14 @@
         margin: 5px;
       }
 
-      .create { background: #2ecc71; color: white; }
-      .reset { background: #e74c3c; color: white; }
+      .create {
+        background: #2ecc71;
+        color: white;
+      }
+      .reset {
+        background: #e74c3c;
+        color: white;
+      }
 
       .toolbar {
         display: flex;
@@ -71,14 +83,16 @@
         object-fit: contain;
       }
 
-      .selected { border: 4px solid #ff4da6; }
+      .selected {
+        border: 4px solid #ff4da6;
+      }
 
       .board-container {
         display: none;
         width: max-content;
         margin: 20px auto;
         padding: 25px;
-        background: rgba(70,120,220,0.3);
+        background: rgba(70, 120, 220, 0.3);
         backdrop-filter: blur(6px);
         border-radius: 25px;
       }
@@ -109,35 +123,49 @@
       .card.drag-over {
         outline: 3px dashed #ff4da6;
       }
+      .label {
+        width: 30x;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+      }
     </style>
   </head>
 
   <body>
     <h1>Play Together</h1>
-        <div class="creator-header">CREATED BY XUAN PHU</div>
-
+    <div class="creator-header">CREATED BY XUAN PHU</div>
     <div class="control">
-      Hàng: <input type="number" id="rows" value="6">
-      Cột: <input type="number" id="cols" value="12">
+      Row: <input type="number" id="rows" value="6" /> Column:
+      <input type="number" id="cols" value="12" />
       <button class="create" onclick="createBoard()">Create</button>
       <button class="reset" onclick="resetBoard()">Reset</button>
     </div>
 
     <div class="toolbar">
-
-      <div class="icon" draggable="true"
-           onclick="selectIcon('images/sun.png', this)"
-           ondragstart="dragIcon('images/sun.png', event)">
-        <img src="images/sun.png">
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/sun.png', this)"
+        ondragstart="dragIcon('images/sun.png', event)"
+      >
+        <img src="images/sun.png" />
       </div>
 
-      <div class="icon" draggable="true"
-           onclick="selectIcon('images/lightning.png', this)"
-           ondragstart="dragIcon('images/lightning.png', event)">
-        <img src="images/lightning.png">
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/lightning.png', this)"
+        ondragstart="dragIcon('images/lightning.png', event)"
+      >
+        <img src="images/lightning.png" />
       </div>
 
-            <div
+      <div
         class="icon"
         draggable="true"
         onclick="selectIcon('images/snowman.png', this)"
@@ -163,30 +191,51 @@
       >
         <img src="images/wind.png" />
       </div>
-      <div class="icon" draggable="true"
-           onclick="selectIcon('images/hint.png', this)"
-           ondragstart="dragIcon('images/hint.png', event)">
-        <img src="images/hint.png">
+
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/Moon.png', this)"
+        ondragstart="dragIcon('images/Moon.png', event)"
+      >
+        <img src="images/Moon.png" />
       </div>
 
-      <div class="icon" draggable="true"
-           onclick="selectIcon('images/chance.png', this)"
-           ondragstart="dragIcon('images/chance.png', event)">
-        <img src="images/chance.png">
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/hint.png', this)"
+        ondragstart="dragIcon('images/hint.png', event)"
+      >
+        <img src="images/hint.png" />
       </div>
 
-      <div class="icon" draggable="true"
-           onclick="selectIcon('images/coin.png', this)"
-           ondragstart="dragIcon('images/coin.png', event)">
-        <img src="images/coin.png">
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/chance.png', this)"
+        ondragstart="dragIcon('images/chance.png', event)"
+      >
+        <img src="images/chance.png" />
       </div>
 
-      <div class="icon" draggable="true"
-           onclick="selectIcon('', this)"
-           ondragstart="dragIcon('', event)">
-        ❌
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('images/coin.png', this)"
+        ondragstart="dragIcon('images/coin.png', event)"
+      >
+        <img src="images/coin.png" />
       </div>
 
+      <div
+        class="icon"
+        draggable="true"
+        onclick="selectIcon('', this)"
+        ondragstart="dragIcon('', event)"
+      >
+        Delete
+      </div>
     </div>
 
     <div class="board-container" id="boardContainer">
@@ -199,20 +248,22 @@
 
       function selectIcon(icon, el) {
         currentIcon = icon;
-        document.querySelectorAll(".icon").forEach(i=>i.classList.remove("selected"));
+        document
+          .querySelectorAll(".icon")
+          .forEach((i) => i.classList.remove("selected"));
         el.classList.add("selected");
       }
 
-function dragIcon(icon, e) {
-  dragIconData = icon;
+      function dragIcon(icon, e) {
+        dragIconData = icon;
 
-  // tạo ảnh trong suốt để ẩn ghost
-  const img = new Image();
-  img.src =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
+        // tạo ảnh trong suốt để ẩn ghost
+        const img = new Image();
+        img.src =
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
-  e.dataTransfer.setDragImage(img, 0, 0);
-}
+        e.dataTransfer.setDragImage(img, 0, 0);
+      }
 
       function createBoard() {
         const rows = +document.getElementById("rows").value;
@@ -220,39 +271,59 @@ function dragIcon(icon, e) {
 
         boardContainer.style.display = "block";
         board.innerHTML = "";
-        board.style.gridTemplateColumns = `repeat(${cols},70px)`;
 
-        for (let i = 0; i < rows * cols; i++) {
-          const card = document.createElement("div");
-          card.className = "card";
+        board.style.gridTemplateColumns = `30px repeat(${cols},70px)`;
 
-          // CLICK
-          card.onclick = () => {
-            card.innerHTML = currentIcon ? `<img src="${currentIcon}">` : "";
-            saveBoard();
-          };
+        const corner = document.createElement("div");
+        corner.style.width = "30px";
+        corner.style.height = "30px";
+        board.appendChild(corner);
 
-          // DRAG DROP
-          card.ondragover = e => e.preventDefault();
+        for (let c = 1; c <= cols; c++) {
+          const colLabel = document.createElement("div");
+          colLabel.className = "label";
+          colLabel.innerText = c;
+          board.appendChild(colLabel);
+        }
 
-          card.ondragenter = () => card.classList.add("drag-over");
-          card.ondragleave = () => card.classList.remove("drag-over");
+        for (let r = 1; r <= rows; r++) {
+          const rowLabel = document.createElement("div");
+          rowLabel.className = "label";
+          rowLabel.innerText = r;
+          board.appendChild(rowLabel);
 
-          card.ondrop = () => {
-            card.classList.remove("drag-over");
-            card.innerHTML = dragIconData ? `<img src="${dragIconData}">` : "";
-            saveBoard();
-          };
+          for (let c = 1; c <= cols; c++) {
+            const card = document.createElement("div");
+            card.className = "card";
 
-          board.appendChild(card);
+            card.onclick = () => {
+              card.innerHTML = currentIcon ? `<img src="${currentIcon}">` : "";
+              saveBoard();
+            };
+
+            card.ondragover = (e) => e.preventDefault();
+
+            card.ondragenter = () => card.classList.add("drag-over");
+
+            card.ondragleave = () => card.classList.remove("drag-over");
+
+            card.ondrop = () => {
+              card.classList.remove("drag-over");
+              card.innerHTML = dragIconData
+                ? `<img src="${dragIconData}">`
+                : "";
+              saveBoard();
+            };
+
+            board.appendChild(card);
+          }
         }
 
         loadBoard();
       }
-
       function saveBoard() {
         const data = [];
-        document.querySelectorAll(".card").forEach(c=>{
+        document.querySelectorAll(".card").forEach((c) => {
           const img = c.querySelector("img");
           data.push(img ? img.src : "");
         });
@@ -263,14 +334,14 @@ function dragIcon(icon, e) {
         const data = JSON.parse(localStorage.getItem("playTogetherBoard"));
         if (!data) return;
 
-        document.querySelectorAll(".card").forEach((c,i)=>{
+        document.querySelectorAll(".card").forEach((c, i) => {
           if (data[i]) c.innerHTML = `<img src="${data[i]}">`;
         });
       }
 
       function resetBoard() {
         localStorage.removeItem("playTogetherBoard");
-        document.querySelectorAll(".card").forEach(c=>c.innerHTML="");
+        document.querySelectorAll(".card").forEach((c) => (c.innerHTML = ""));
       }
     </script>
   </body>
